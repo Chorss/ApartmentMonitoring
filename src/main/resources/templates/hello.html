@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/header :: header"/>
+<body>
+<th:block th:replace="fragments/header_nav :: headerNav"/>
+<main class="container">
+    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</main>
+<th:block th:replace="fragments/footer :: footer"/>
+</body>
+</html>

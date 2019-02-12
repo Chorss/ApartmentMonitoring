@@ -1,0 +1,64 @@
+wrapper {
+    gradleVersion = '5.1.1'
+}
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+        logbackVersion = '1.2.3'
+        slf4jVersion = '1.7.25'
+        postgreSQLVersion = '42.2.5'
+        mockitoVesrion = '2.23.4'
+        gradleSSHVersion = '2.9.0'
+        hibernateValidatorVersion = '5.4.2.Final'
+        hibernateJava8Version = '5.2.17.Final'
+        mockitoVersion = '2.18.3'
+        junitJupiterVersion = '5.3.2'
+        swaggerVersion = '2.9.2'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+version = '0.0.1-SNAPSHOT'
+
+jar {
+    baseName = 'ApartmentMonitoring'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "${springBootVersion}"
+    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version: "${springBootVersion}"
+
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: "${hibernateValidatorVersion}"
+    compile group: 'org.hibernate', name: 'hibernate-java8', version: "${hibernateJava8Version}"
+    runtime group: 'org.postgresql', name: 'postgresql', version: "${postgreSQLVersion}"
+    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+    compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
+
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: "${swaggerVersion}"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "${swaggerVersion}"
+
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${junitJupiterVersion}"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junitJupiterVersion}"
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junitJupiterVersion}"
+
+    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockitoVersion}"
+    testCompile group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+}
