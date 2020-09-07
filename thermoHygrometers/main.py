@@ -1,28 +1,23 @@
-import data
+import Adafruit_DHT
+import time
 import json
 import requests
-import RPi.GPIO as GPIO
-import dht11
-import time
-import datetime
 
-# initialize GPIO
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BCM)
-GPIO.cleanup()
-
-# read data using pin 14
-instance = dht11.DHT11(pin=14)
+DHT_SENSOR = Adafruit_DHT.DHT11
+DHT_PIN = 4
 
 while True:
-    result = instance.read()
-    if result.is_valid():
+    humidity, temperature = Adafruit_DHT.read(DHT_SENSOR, DHT_PIN)
+    if humidity is not None and temperature is not None:
+        print("Temp={0:0.1f}C Humidity={1:0.1f}%".format(temperature, humidity))
         data = {}
-        data['temperature'] = result.temperature
-        data['humidity'] = result.humidity
-        data['deviceId'] = '371f8d2e-766f-11e8-adc0-fa7ae01bbebc'
+        data['temperature'] = temperature
+        data['humidity'] = humidity
+        data['deviceId'] = '172e650b-711b-4167-81a4-bd14c952fbe7'
         data_json = json.dumps(data)
-        r = requests.post('https://localhost:8080/measurement', data_json)
-        print(r.status_code)
-
-time.sleep(1)
+        headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+        response = requests.post('https://monitoring.railwaytycoon.dev/api/v1/measurement', data_json, headers=headers)
+        print(response.status_code)
+    else:
+        print("Sensor failure. Check wiring.");
+    time.sleep(900);#15min

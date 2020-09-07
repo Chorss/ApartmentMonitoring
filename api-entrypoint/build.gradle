@@ -1,0 +1,11 @@
+dependencies {
+    compile project(":core")
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: "${thymeleafSpringSecurityVersion}"
+
+    //swagger
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: "${swaggerVersion}"
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "${swaggerVersion}"
+}

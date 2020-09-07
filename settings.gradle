@@ -1,1 +1,5 @@
 rootProject.name = 'ApartmentMonitoring'
+include 'api-entrypoint'
+include 'application'
+include 'core'
+include 'delivery'

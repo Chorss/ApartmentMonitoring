@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: apartment-monitoring
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: bedswerver
+      password: PUQMQmhcRAn2p5TAkSPB
+      enabled: true
+
+  profiles:
+    active: dev

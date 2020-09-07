@@ -1,0 +1,26 @@
+# Datasource
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/apartmentMonitoring
+    driverClassName: org.postgresql.Driver
+    username: PfcbkhWsr
+    password: jcY8YtquWQPSrnRF
+    sql-script-encoding: UTF-8
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+
+  resources:
+    add-mappings: true
+
+  thymeleaf:
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+isEnabledRegistration: true

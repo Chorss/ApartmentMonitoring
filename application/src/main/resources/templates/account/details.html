@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="fragments/header :: header"/>
+<body>
+<th:block th:replace="fragments/header_nav :: headerNav"/>
+<main class="container">
+    <p>
+        <b>Name</b> <a th:text="${account.getName()}"></a><br/>
+        <b>Email</b> <a th:text="${account.getEmail()}"></a><br/>
+    </p>
+</main>
+<th:block th:replace="fragments/footer :: footer"/>
+</body>
+</html>

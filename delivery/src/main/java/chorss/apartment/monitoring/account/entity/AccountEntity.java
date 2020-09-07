@@ -1,0 +1,67 @@
+package chorss.apartment.monitoring.account.entity;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "ACCOUNTS")
+public class AccountEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID uuid;
+
+    @Column(name = "email", length = 255, nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "password", length = 250, nullable = false)
+    private String password;
+
+    @Column(name = "name", length = 250, nullable = true)
+    private String name;
+
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<AccountRoleEntity> roles = new ArrayList<>();
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<AccountRoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<AccountRoleEntity> roles) {
+        this.roles = roles;
+    }
+}

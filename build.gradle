@@ -1,64 +1,60 @@
 wrapper {
-    gradleVersion = '5.1.1'
+    gradleVersion = '6.5'
 }
-buildscript {
-    ext {
-        springBootVersion = '2.1.2.RELEASE'
-        logbackVersion = '1.2.3'
-        slf4jVersion = '1.7.25'
-        postgreSQLVersion = '42.2.5'
-        mockitoVesrion = '2.23.4'
-        gradleSSHVersion = '2.9.0'
-        hibernateValidatorVersion = '5.4.2.Final'
-        hibernateJava8Version = '5.2.17.Final'
-        mockitoVersion = '2.18.3'
-        junitJupiterVersion = '5.3.2'
-        swaggerVersion = '2.9.2'
+
+subprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
-}
 
-apply plugin: 'java'
-apply plugin: 'idea'
+    buildscript {
+        ext {
+            springBootVersion = '2.3.1.RELEASE'
+            springCloudVersion = '2.2.3.RELEASE'
+            logbackVersion = '1.2.3'
+            slf4jVersion = '1.7.26'
+            mockitoVersion = '3.3.3'
+            gradleSSHVersion = '2.9.0'
+            junitJupiterVersion = '5.6.2'
+            swaggerVersion = '2.9.2'
+            postgreSQLVersion = '42.2.14'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+            h2Version = '1.4.199'
+            assertjCoreVersion = '3.12.2'
+            thymeleafSpringSecurityVersion = '3.0.4.RELEASE'
+        }
 
-version = '0.0.1-SNAPSHOT'
+        apply plugin: 'idea'
+        apply plugin: 'java-library'
 
-jar {
-    baseName = 'ApartmentMonitoring'
-}
 
-repositories {
-    mavenCentral()
-}
+        sourceCompatibility = 1.11
+        targetCompatibility = 1.11
 
-dependencies {
+        version = project.property('application.version')
 
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: "${springBootVersion}"
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: "${springBootVersion}"
-    runtime group: 'org.springframework.boot', name: 'spring-boot-devtools', version: "${springBootVersion}"
+        group = 'chorss.apartment.monitoring'
+    }
 
-    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+    test {
+        useJUnitPlatform()
+    }
 
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: "${hibernateValidatorVersion}"
-    compile group: 'org.hibernate', name: 'hibernate-java8', version: "${hibernateJava8Version}"
-    runtime group: 'org.postgresql', name: 'postgresql', version: "${postgreSQLVersion}"
-    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    dependencies {
+//        LOGGER
+        compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
+        compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
 
-    compile group: 'org.slf4j', name: 'slf4j-api', version: "${slf4jVersion}"
-    compile group: 'ch.qos.logback', name: 'logback-core', version: "${logbackVersion}"
+//        TEST
+        testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${junitJupiterVersion}"
+        testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junitJupiterVersion}"
+        testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junitJupiterVersion}"
 
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: "${swaggerVersion}"
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: "${swaggerVersion}"
-
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "${junitJupiterVersion}"
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "${junitJupiterVersion}"
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: "${junitJupiterVersion}"
-
-    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockitoVersion}"
-    testCompile group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+        testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: "${mockitoVersion}"
+        testCompile group: 'org.mockito', name: 'mockito-core', version: "${mockitoVersion}"
+        testCompile group: 'org.assertj', name: 'assertj-core', version: "${assertjCoreVersion}"
+    }
 }
