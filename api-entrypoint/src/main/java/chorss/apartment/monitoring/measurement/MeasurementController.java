@@ -23,7 +23,8 @@ import java.util.stream.Collectors;
 @Controller
 class MeasurementController {
 
-    private static final String MEASUREMENT_PAGE = "measurement";
+    private static final String MEASUREMENT = "measurement";
+    private static final String MEASUREMENT_PAGE = MEASUREMENT;
     private final MeasurementService mensurationService;
 
     @Autowired
@@ -42,7 +43,7 @@ class MeasurementController {
     public String getMeasurement(@PathVariable String deviceUUID, Model model) {
         UUID uuid = UUID.fromString(deviceUUID);
 
-        model.addAttribute("measurement", getMeasurementDTOList(mensurationService.getMeasurementLast24Hours(uuid)));
+        model.addAttribute(MEASUREMENT, getMeasurementDTOList(mensurationService.getMeasurementLast24Hours(uuid)));
 
         return MEASUREMENT_PAGE;
     }
@@ -54,7 +55,7 @@ class MeasurementController {
         LocalDateTime startTime = LocalDateTime.parse(from);
         LocalDateTime endTime = LocalDateTime.parse(to);
 
-        model.addAttribute("measurement", getMeasurementDTOList(mensurationService.getMeasurementByDate(deviceID, startTime, endTime)));
+        model.addAttribute(MEASUREMENT, getMeasurementDTOList(mensurationService.getMeasurementByDate(deviceID, startTime, endTime)));
         model.addAttribute("from", startTime.format(DateTimeFormatterService.getDateTimeFormatter()));
         model.addAttribute("to", endTime.format(DateTimeFormatterService.getDateTimeFormatter()));
 

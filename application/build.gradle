@@ -8,14 +8,12 @@ buildscript {
 
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "org.hidetake:gradle-ssh-plugin:${gradleSSHVersion}"
     }
 
     archivesBaseName = "ApartmentMonitoring"
 }
 
 apply plugin: 'org.springframework.boot'
-apply plugin: 'org.hidetake.ssh'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {

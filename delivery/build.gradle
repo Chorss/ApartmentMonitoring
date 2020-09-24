@@ -5,5 +5,4 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: "${springBootVersion}"
 
     runtime group: 'org.postgresql', name: 'postgresql', version: "${postgreSQLVersion}"
-    runtime group: 'com.h2database', name: 'h2', version: "${h2Version}"
 }

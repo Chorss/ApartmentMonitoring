@@ -45,8 +45,11 @@ class DeviceServiceImpl implements DeviceService {
         Device device = deviceRepository.findByUuid(uuid);
         String email = loggedAccountService.getAccount().getEmail();
 
-        if (device.getAccount().getEmail().equalsIgnoreCase(email)) {
+        if (isLoggedAccountEqualAccountFromDevice(device, email)) {
+            LOG.debug("Remove Device device:{}", device);
             deviceRepository.delete(device);
+        } else {
+            LOG.error("Attempted device deletion by an unauthorized user. email:{}, device:{}", email, device);
         }
     }
 
@@ -54,5 +57,9 @@ class DeviceServiceImpl implements DeviceService {
     public List<Device> getDevices() {
         Account loggedAccount = loggedAccountService.getAccount();
         return deviceRepository.findAllByAccount(loggedAccount);
+    }
+
+    private boolean isLoggedAccountEqualAccountFromDevice(Device device, String email) {
+        return device.getAccount() != null && device.getAccount().getEmail().equalsIgnoreCase(email);
     }
 }
