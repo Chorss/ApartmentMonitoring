@@ -11,9 +11,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "measurement",
+@Table(name = "MEASUREMENT",
         indexes = {
-                @Index(name = "measurement_index", columnList = "created")
+                @Index(name = "MEASUREMENT_DEVICE_ID_IDX", columnList = "DEVICE_ID"),
+                @Index(name = "MEASUREMENT_CREATED_IDX", columnList = "CREATED")
         }
 )
 public class MeasurementEntity {
@@ -22,21 +23,23 @@ public class MeasurementEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "device")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "DEVICE_ID")
     private DeviceEntity device;
 
     @NotNull
     @Min(-100)
     @Max(100)
+    @Column(nullable = false)
     private BigDecimal temperature;
 
     @NotNull
     @Min(0)
     @Max(100)
+    @Column(nullable = false)
     private BigDecimal humidity;
 
-    @Column(name = "created", nullable = false)
+    @Column(nullable = false)
     private LocalDateTime created;
 
     public UUID getUuid() {

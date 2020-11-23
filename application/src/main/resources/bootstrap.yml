@@ -4,8 +4,8 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      username: bedswerver
-      password: PUQMQmhcRAn2p5TAkSPB
+      username: username
+      password: password
       enabled: true
 
   profiles:

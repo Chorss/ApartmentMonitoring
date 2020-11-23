@@ -6,20 +6,24 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ACCOUNTS")
+@Table(name = "ACCOUNTS",
+        indexes = {
+                @Index(name = "ACCOUNTS_EMAIL_UDX", unique = true, columnList = "EMAIL")
+        }
+)
 public class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
-    @Column(name = "email", length = 255, nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", length = 250, nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "name", length = 250, nullable = true)
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)

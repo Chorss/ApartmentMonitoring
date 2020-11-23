@@ -55,7 +55,7 @@ class DeviceController {
     @GetMapping(value = "/remove/device/{uuid}")
     public String removeDevice(@PathVariable String uuid) {
         deviceService.remove(UUID.fromString(uuid));
-        return DEVICES_INDEX_PAGE;
+        return DEVICES_DEVICES_PAGE;
     }
 
     private List<DeviceDTO> getDeviceDTOList() {

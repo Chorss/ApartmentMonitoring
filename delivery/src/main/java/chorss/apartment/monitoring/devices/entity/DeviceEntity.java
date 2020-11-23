@@ -1,9 +1,11 @@
 package chorss.apartment.monitoring.devices.entity;
 
 import chorss.apartment.monitoring.account.entity.AccountEntity;
+import chorss.apartment.monitoring.measurement.entity.MeasurementEntity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,6 +19,9 @@ public class DeviceEntity {
     @ManyToOne
     @JoinColumn(name = "account")
     private AccountEntity account;
+
+    @OneToMany(mappedBy = "device", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<MeasurementEntity> measurements;
 
     @Column(nullable = false)
     private String name;

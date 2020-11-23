@@ -3,8 +3,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/apartmentMonitoring
     driverClassName: org.postgresql.Driver
-    username: 
-    password: 
+    username: PfcbkhWsr
+    password: jcY8YtquWQPSrnRF
     sql-script-encoding: UTF-8
 
   jpa:
